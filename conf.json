@@ -1,7 +1,39 @@
 {
-  url: 'http://localhost:3000/oauth2/token',
-  client: 'tester',
-  clientsecret: 'secret',
-  user: 'agile',
-  usersecret: 'secret'
+  "url": "http://localhost:3000/oauth2/token",
+  "client": "tester",
+  "clientsecret": "secret",
+  "user": "agile",
+  "usersecret": "secret",
+  "tabs": {
+    "discover": {
+      "index": 0
+    },
+    "devices": {
+      "index": 1
+    },
+    "profile": {
+      "index": 2
+    },
+    "recommender": {
+      "index": 3
+    },
+    "user": {
+      "index": 4,
+      "buttons": {
+        "delete": 0,
+        "view": 1,
+        "group": 2,
+        "policies": 3
+      }
+    },
+    "client": {
+      "index": 5
+    },
+    "groups": {
+      "index": 6
+    },
+    "database": {
+      "index": 7
+    }
+  }
 }
