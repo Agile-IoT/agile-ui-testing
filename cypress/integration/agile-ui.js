@@ -41,7 +41,8 @@ describe('User view privileges', () => {
     cy.get('#navigation').get('button').then(tabs => {
       var workingtab = conf.tabs.profile
       tabs[workingtab.index].click()
-      cy.url().should('contain', '/entity/').and('match', /\/user/)
+      var regex = new RegExp(workingtab.path.replace(/:[a-zA-Z]*/, '.*'))
+      cy.url().should('match', regex)
       expand()
       cy.get('#cypress').should('not.exist')
       cy.get('span').contains('cypress').should('not.exist')
@@ -62,13 +63,14 @@ describe('User view privileges', () => {
 
   it('Switch to user overview tab and view first user attributes', () => {
     cy.get('#navigation').get('button').then(tabs => {
-      var workingtab = conf.tabs.user
+      var workingtab = conf.tabs.userlist
       tabs[workingtab.index].click()
       cy.location('pathname').should('have', '/list/user')
       cy.wait(1500)
       cy.get('.container--app').get('a').then(viewbuttons => {
         viewbuttons[workingtab.buttons.view].click() //First user attributes
-        cy.url().should('contain', '/entity/').and('match', /\/user/)
+        var regex = new RegExp(conf.tabs.profile.path.replace(/:[a-zA-Z]*/, '.*'))
+        cy.url().should('match', regex)
         cy.wait(1500)
         cy.get('#new_password').should('exist')
         cy.get('#old_password').should('exist')
@@ -80,13 +82,14 @@ describe('User view privileges', () => {
 
   it('Switch to user overview tab and view second user attributes', () => {
     cy.get('#navigation').get('button').then(tabs => {
-      var workingtab = conf.tabs.user
+      var workingtab = conf.tabs.userlist
       tabs[workingtab.index].click()
       cy.location('pathname').should('have', '/list/user')
       cy.wait(1500)
       cy.get('.container--app').get('a').then(viewbuttons => {
         viewbuttons[workingtab.buttons.view + Object.keys(workingtab.buttons).length].click() //Second user attributes
-        cy.url().should('contain', '/entity/').and('match', /\/user/)
+        var regex = new RegExp(conf.tabs.profile.path.replace(/:[a-zA-Z]*/, '.*'))
+        cy.url().should('match', regex)
         cy.wait(1500)
         cy.get('#new_password').should('exist')
         cy.get('#old_password').should('not.exist')

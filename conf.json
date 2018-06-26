@@ -12,13 +12,15 @@
       "index": 1
     },
     "profile": {
-      "index": 2
+      "index": 2,
+      "path": "/entity/:id/user"
     },
     "recommender": {
       "index": 3
     },
-    "user": {
+    "userlist": {
       "index": 4,
+      "path": "/list/user",
       "buttons": {
         "delete": 0,
         "view": 1,
