@@ -1,4 +1,4 @@
-var conf = require('../../conf')
+var conf = require('../../conf.json')
 
 var auth_options =  {
   method: 'POST',

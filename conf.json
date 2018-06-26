@@ -1,9 +1,7 @@
-conf = {
+{
   url: 'http://localhost:3000/oauth2/token',
   client: 'tester',
   clientsecret: 'secret',
   user: 'agile',
   usersecret: 'secret'
 }
-
-module.exports = conf
