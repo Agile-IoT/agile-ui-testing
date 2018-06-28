@@ -37,6 +37,39 @@ describe('User view privileges', () => {
     cy.wait(3000) //Let react load all state objects
   })
 
+  it('Create and delete entities', () => {
+    cy.get('#navigation').get('button').then(tabs => {
+      var workingtab = conf.tabs.userlist
+      tabs[workingtab.index].click()
+      cy.get('#cypress-agile-local').should('not.exist')
+    })
+    cy.get('#navigation').get('button').then(tabs => {
+      var workingtab = conf.tabs.userlist
+      tabs[workingtab.index].click()
+      var regex = new RegExp(workingtab.path.replace(/:[a-zA-Z]*/, '.*'))
+      cy.url().should('match', regex)
+      cy.wait(1500)
+      cy.get('.container--app').get('a').then(viewbuttons => {
+        viewbuttons[viewbuttons.length - 1].click()
+        cy.location('pathname').should('eq', conf.views.addUser.path)
+        cy.get('#root_user_name').type('cypress')
+        cy.get('#root_auth_type').select('agile-local')
+        cy.get('#root_password').type('secret')
+        cy.get('#root_role').select('admin')
+        cy.get('button[type="submit"]').click()
+        cy.wait(3000)
+      })
+    })
+    cy.get('#navigation').get('button').then(tabs => {
+      var workingtab = conf.tabs.userlist
+      tabs[workingtab.index].click()
+      cy.get('#cypress-agile-local').should('exist')
+      cy.get('#delete_cypress-agile-local').click()
+      cy.wait(3000)
+      cy.get('#cypress-agile-local').should('not.exist')
+    })
+  })
+
   it('Add and update attribute to own user entity and delete it', () => {
     cy.get('#navigation').get('button').then(tabs => {
       var workingtab = conf.tabs.profile

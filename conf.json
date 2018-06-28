@@ -41,6 +41,9 @@
   "views": {
     "user": {
       "path": "/entity/:id/user"
+    },
+    "addUser": {
+      "path": "/add/user"
     }
   }
 }
