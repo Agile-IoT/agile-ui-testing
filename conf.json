@@ -37,5 +37,10 @@
     "database": {
       "index": 7
     }
+  },
+  "views": {
+    "user": {
+      "path": "/entity/:id/user"
+    }
   }
 }

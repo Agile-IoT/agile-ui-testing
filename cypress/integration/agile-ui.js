@@ -65,11 +65,11 @@ describe('User view privileges', () => {
     cy.get('#navigation').get('button').then(tabs => {
       var workingtab = conf.tabs.userlist
       tabs[workingtab.index].click()
-      cy.location('pathname').should('have', '/list/user')
+      cy.location('pathname').should('eq', workingtab.path)
       cy.wait(1500)
       cy.get('.container--app').get('a').then(viewbuttons => {
         viewbuttons[workingtab.buttons.view].click() //First user attributes
-        var regex = new RegExp(conf.tabs.profile.path.replace(/:[a-zA-Z]*/, '.*'))
+        var regex = new RegExp(conf.views.user.path.replace(/:[a-zA-Z]*/, '.*'))
         cy.url().should('match', regex)
         cy.wait(1500)
         cy.get('#new_password').should('exist')
@@ -84,11 +84,11 @@ describe('User view privileges', () => {
     cy.get('#navigation').get('button').then(tabs => {
       var workingtab = conf.tabs.userlist
       tabs[workingtab.index].click()
-      cy.location('pathname').should('have', '/list/user')
+      cy.location('pathname').should('eq', workingtab.path)
       cy.wait(1500)
       cy.get('.container--app').get('a').then(viewbuttons => {
         viewbuttons[workingtab.buttons.view + Object.keys(workingtab.buttons).length].click() //Second user attributes
-        var regex = new RegExp(conf.tabs.profile.path.replace(/:[a-zA-Z]*/, '.*'))
+        var regex = new RegExp(conf.views.user.path.replace(/:[a-zA-Z]*/, '.*'))
         cy.url().should('match', regex)
         cy.wait(1500)
         cy.get('#new_password').should('exist')
