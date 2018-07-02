@@ -32,7 +32,8 @@
       "index": 5
     },
     "groups": {
-      "index": 6
+      "index": 6,
+      "path": "/list/group"
     },
     "database": {
       "index": 7
@@ -44,6 +45,9 @@
     },
     "addUser": {
       "path": "/add/user"
+    },
+    "addGroup": {
+      "path": "/add/group"
     }
   }
 }
