@@ -30,7 +30,7 @@ function expand() {
     let id = parts.find(part => {
       return part.includes('!@!')
     })
-    cy.get('#' + id.replace('!@!', '-')).find('button').click()
+    cy.get('#' + id.replace('!@!', '-')).click()
   })
 }
 
