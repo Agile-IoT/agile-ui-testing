@@ -2,7 +2,9 @@
   "url": "http://localhost:3000/oauth2/token",
   "client": "tester",
   "clientsecret": "secret",
-  "user": "agile",
+  "adminuser": "agile",
+  "adminusersecret": "secret",
+  "user": "bob",
   "usersecret": "secret",
   "tabs": {
     "discover": {
