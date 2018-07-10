@@ -48,14 +48,23 @@ function userAuthAndVisitUI() {
   })
 }
 
-function expand() {
+function expand(group) {
   return cy.location().then(loc => {
     cy.wait(1000)
     let parts = loc.pathname.split('/')
-    let id = parts.find(part => {
-      return part.includes('!@!')
-    })
-    cy.get('#' + id.replace('!@!', '-')).click('left')
+
+    if(!group) {
+      let id = parts.find(part => {
+        return part.includes('!@!')
+      })
+      cy.get('#' + id.replace('!@!', '-')).click('left')
+    } else {
+      let owner = parts.find(part => {
+        return part.includes('!@!')
+      })
+      let id = parts[parts.length - 1]
+      cy.get('#' + id + '-' + owner.replace('!@!', '-')).click('left')
+    }
   })
 }
 
@@ -96,9 +105,10 @@ describe('Security User', () => {
         cy.wait(3000)
         tabs[conf.tabs.groups.index].click()
       })
-      cy.get('#view_cypress-group').click()
+      cy.get('#view_cypress-group-' + conf.user + '-agile-local').click()
+      expand(true)
       cy.wait(1000)
-      cy.get('.container--app').should('contain', 'agile!@!agile-local')
+      cy.get('#root-entities').should('contain', 'agile!@!agile-local')
     })
 
     //Remove user from group
@@ -115,17 +125,18 @@ describe('Security User', () => {
         cy.wait(3000)
         tabs[conf.tabs.groups.index].click()
       })
-      cy.get('#view_cypress-group').click()
-      cy.get('.container--app').should('not.contain', conf.adminuser + '!@!agile-local')
+      cy.get('#view_cypress-group-' + conf.user + '-agile-local').click()
+      expand(true)
+      cy.get('#root-entities').should('not.contain', conf.adminuser + '!@!agile-local')
     })
 
     //Delete group
     cy.get('#navigation').get('button').then(tabs => {
       tabs[conf.tabs.groups.index].click()
-      cy.get('#cypress-group').should('exist')
-      cy.get('#delete_cypress-group').click()
+      cy.get('#cypress-group-' + conf.user + '-agile-local').should('exist')
+      cy.get('#delete_cypress-group-' + conf.user + '-agile-local').click()
       cy.wait(1000)
-      cy.get('#cypress-group').should('not.exist')
+      cy.get('#cypress-group-' + conf.user + '-agile-local').should('not.exist')
     })
   })
 
@@ -255,9 +266,10 @@ describe('Security Admin', () => {
         cy.wait(3000)
         tabs[conf.tabs.groups.index].click()
       })
-      cy.get('#view_cypress-group').click()
+      cy.get('#view_cypress-group-' + conf.adminuser + '-agile-local').click()
+      expand(true)
       cy.wait(1000)
-      cy.get('.container--app').should('contain', conf.adminuser + '!@!agile-local')
+      cy.get('#root-entities').should('contain', conf.adminuser + '!@!agile-local')
     })
 
     //Remove user from group
@@ -274,17 +286,18 @@ describe('Security Admin', () => {
         cy.wait(3000)
         tabs[conf.tabs.groups.index].click()
       })
-      cy.get('#view_cypress-group').click()
-      cy.get('.container--app').should('not.contain', conf.adminuser + '!@!agile-local')
+      cy.get('#view_cypress-group-' + conf.adminuser + '-agile-local').click()
+      expand(true)
+      cy.get('#root-entities').should('not.contain', conf.adminuser + '!@!agile-local')
     })
 
     //Delete group
     cy.get('#navigation').get('button').then(tabs => {
       tabs[conf.tabs.groups.index].click()
-      cy.get('#cypress-group').should('exist')
-      cy.get('#delete_cypress-group').click()
+      cy.get('#cypress-group-' + conf.adminuser + '-agile-local').should('exist')
+      cy.get('#delete_cypress-group-' + conf.adminuser + '-agile-local').click()
       cy.wait(1000)
-      cy.get('#cypress-group').should('not.exist')
+      cy.get('#cypress-group-' + conf.adminuser + '-agile-local').should('not.exist')
     })
   })
 
