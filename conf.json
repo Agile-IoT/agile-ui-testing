@@ -6,6 +6,11 @@
   "adminusersecret": "secret",
   "user": "bob",
   "usersecret": "secret",
+  "dummy_device": {
+    "id": "00:11:22:33:44:55",
+    "name": "Dummy",
+    "data": "DummyData"
+  },
   "tabs": {
     "discover": {
       "index": 0
