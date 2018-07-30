@@ -1,6 +1,7 @@
 {
-  "UI_URL": "http://localhost:2000",
-  "TOKEN_URL": "http://localhost:3000/oauth2/token",
+  "host": "192.168.1.106",
+  "UI_URL": "http://192.168.1.106:2000",
+  "TOKEN_URL": "http://192.168.1.106:3000/oauth2/token",
   "client": "tester",
   "clientsecret": "secret",
   "adminuser": "agile",
