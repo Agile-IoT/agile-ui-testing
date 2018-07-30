@@ -28,13 +28,7 @@
     },
     "userlist": {
       "index": 4,
-      "path": "/list/user",
-      "buttons": {
-        "delete": 0,
-        "view": 1,
-        "group": 2,
-        "policies": 3
-      }
+      "path": "/list/user"
     },
     "client": {
       "index": 5
