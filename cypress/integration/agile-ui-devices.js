@@ -2,7 +2,7 @@ let conf = require('../../conf.json')
 
 let admin_auth = {
   method: 'POST',
-  url: conf.url,
+  url: conf.TOKEN_URL,
   auth: {
     user: conf.client,
     pass: conf.clientsecret
@@ -19,7 +19,7 @@ function adminAuthAndVisitUI() {
   return new Promise(() => {
     cy.request(admin_auth).then(res => {
       let token = res.body.access_token
-      cy.visit('http://localhost:2000?token=' + token)
+      cy.visit(conf.UI_URL + '?token=' + token)
     })
   })
 }
