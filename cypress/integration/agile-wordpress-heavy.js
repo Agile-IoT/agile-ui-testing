@@ -19,7 +19,7 @@ let results = {
 }
 describe('WordPress test', () => {
 	it('Login 100 times with an admin user and a normal user and logout', () => {
-		for (let i = 0; i < 100; i++) {
+		for (let i = 0; i < 50; i++) {
 			//ADMIN USER
 			let start = Date.now()
 			cy.visit(wordpressConf.host).then(() => {
@@ -91,7 +91,7 @@ describe('WordPress test', () => {
 				cy.wrap(elems).click({force: true}).then(() => {
 					cy.url().should('be', wordpressConf.host + '/wp-login.php?redirect_to=http%3A%2F%2Flocalhost%2Fwp-admin%2F&reauth=1')
 					results.user.logout.push(Date.now() - start)
-					cy.log(JSON.stringify(results.user))
+					cy.log('Done with iteration ' + i)
 					cy.writeFile("results.json", JSON.stringify(results));
 				})
 			})
