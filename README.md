@@ -20,3 +20,8 @@ To write tests add or modify files in the ```cypress/integration/``` directory. 
  
 ## 3. Run tests
 Run ```cypress:open``` to start the cypress framework. Chose a file in which your tests are. The tests will start automatically.
+
+
+## Known issues
+Cypress has an [open issue](https://github.com/cypress-io/cypress/issues/1955) that describes a bug with the memory allocation. This usually happens only if cypress is running for long time.
+If the error occurs the test stops and does not recover. However, it is possible to close the current test and start it again from the beginning.
