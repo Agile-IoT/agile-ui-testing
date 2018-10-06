@@ -14,27 +14,31 @@ describe('WordPress test', () => {
 				cy.visit(wordpressConf.host).then(() => {
 					results.visit.push(Date.now() - start)
 					start = Date.now()
+					return cy.visit(wordpressConf.host + '/wp-admin') 
 				})
-				cy.visit(wordpressConf.host + '/wp-admin').then(() => {
+				.then(() => {
 					results.login_page.push(Date.now() - start)
-				})
-				cy.get('#user_login').type(wordpressConf.adminuser)
-				cy.get('#user_pass').type(wordpressConf.adminusersecret).then(() => {
+					cy.wait(3000);				
+					return cy.get('#user_login').should('be.empty')
+				}).then(() => {
+					return cy.get('#user_pass').should('be.empty')
+				}).then(() => {
+					return cy.get('#user_login').type(wordpressConf.adminuser)
+				}).then(() => {
+					return cy.get('#user_pass').type(wordpressConf.adminusersecret)
+				}).then(() => {
 					start = Date.now()
-				})
-				cy.get('#wp-submit').click().then(() => {
-					results.admin.login.push(Date.now() - start)
-					start = Date.now()
-				})
-				cy.visit(wordpressConf.host + '/wp-admin/profile.php' , {failOnStatusCode: false}).then(() => {
+					return cy.get('#wp-submit').click()
+				}).then(() => {
 					results.admin.profile.push(Date.now() - start)
 					start = Date.now()
-				}) // profile
-				cy.visit(wordpressConf.host + '/wp-admin').then(() => {
+					return cy.visit(wordpressConf.host + '/wp-admin')
+				}).then(() => {
 					results.admin.dashboard.push(Date.now() - start)
+					cy.wait(3000);
 					start = Date.now()
-				})  // dashboard
-				cy.get('#wp-admin-bar-logout').children().then(elems => {
+					return cy.get('#wp-admin-bar-logout').children()
+				}).then(elems => {
 					start = Date.now()
 					cy.wrap(elems).click({force: true}).then(() => {
 						cy.url().should('be', wordpressConf.host + '/wp-login.php?redirect_to=http%3A%2F%2Flocalhost%2Fwp-admin%2F&reauth=1')
