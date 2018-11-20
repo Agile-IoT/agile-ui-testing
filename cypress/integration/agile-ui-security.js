@@ -147,4 +147,29 @@ describe('Security User', () => {
     })
   })
   })
+  it('Create and delete entities', () => {
+    cy.get('#navigation').get('button').then(tabs => {
+      tabs[conf.tabs.userlist.index].click()
+      cy.get('#cypress-agile-local').should('not.exist')
+      return cy.get('#navigation').get('button')
+    }).then(tabs => {
+      tabs[conf.tabs.userlist.index].click()
+      let regex = new RegExp(conf.tabs.userlist.path.replace(/:[a-zA-Z]*/, '.*'))
+      cy.url().should('match', regex)
+      cy.wait(1500)
+      cy.get('#new_entity_button').click()
+      cy.location('pathname').should('eq', conf.views.addUser.path)
+      cy.get('#root_user_name').type('cypress')
+      cy.get('#root_auth_type').select('agile-local')
+      cy.get('#root_password').type('secret')
+      cy.get('#root_role').select('admin')
+      cy.get('button[type="submit"]').click()
+      cy.wait(3000)
+      return cy.get('#navigation').get('button')
+    }).then(tabs => {
+      let workingtab = conf.tabs.userlist
+      tabs[workingtab.index].click()
+      cy.get('#cypress-agile-local').should('not.exist')
+    })
+  })
 })
