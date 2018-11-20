@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "cypress:open": "cypress open",
-    "wordpress": "cypress run --browser chrome --spec cypress/integration/agile-wordpress.js"
+    "wordpress": "cypress run --browser chrome --spec cypress/integration/agile-wordpress.js",
+    "security": "cypress run --browser chrome --spec cypress/integration/agile-ui-security.js"
   },
   "author": "",
   "license": "EPL-1.0",
