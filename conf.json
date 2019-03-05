@@ -1,8 +1,8 @@
 {
-  "host": "192.168.1.106",
-  "UI_URL": "http://192.168.1.106:2000",
-  "TOKEN_URL": "http://192.168.1.106:3000/oauth2/token",
-  "client": "tester",
+  "host": "localhost",
+  "UI_URL": "http://localhost:2000",
+  "TOKEN_URL": "http://localhost:3000/oauth2/token",
+  "client": "wordpress",
   "clientsecret": "secret",
   "adminuser": "agile",
   "adminusersecret": "secret",
@@ -14,6 +14,7 @@
     "data": "DummyData"
   },
   "tabs": {
+    "length" : 7,
     "discover": {
       "index": 0
     },
