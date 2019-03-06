@@ -109,7 +109,8 @@ describe('Security Admin', () => {
       cy.get('#view_cypress-group-' + conf.adminuser + '-agile-local').click()
       expand(true)
       //cy.wait(1000)
-      cy.get('#root-entities').should('contain', conf.adminuser + '!@!agile-local')
+      cy.get('#root-entities').contains('span', conf.adminuser + '!@!agile-local')
+      //cy.get('#root-entities').should('contain', conf.adminuser + '!@!agile-local')
     })
 
     //Remove user from group
@@ -260,7 +261,8 @@ describe('Security User', () => {
       cy.get('#view_cypress-group-' + conf.user + '-agile-local').click()
       expand(true)
       //cy.wait(1000)
-      cy.get('#root-entities').should('contain', 'agile!@!agile-local')
+      cy.get('#root-entities').contains('span', conf.adminuser + '!@!agile-local')
+      //cy.get('#root-entities').should('contain', 'agile!@!agile-local')
     })
 
     //Remove user from group
@@ -324,7 +326,7 @@ describe('Security User', () => {
     })
   })
 
-  
+
     it('Switch to user overview tab and view first user attributes', () => {
 
       cy.get('#navigation').find('button').should('have.length', conf.tabs.length)
