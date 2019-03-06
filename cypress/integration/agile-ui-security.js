@@ -156,6 +156,7 @@ describe('Security Admin', () => {
       cy.get('#new_entity_button').click()
       cy.location('pathname').should('eq', conf.views.addUser.path)
       cy.get('#root_user_name').type('cypress')
+      cy.get('#root_auth_type').find('*').should('have.length', conf.auth_types.count+1)
       cy.get('#root_auth_type').select('agile-local')
       cy.get('#root_password').type('secret')
       cy.get('#root_role').select('admin')
@@ -307,6 +308,7 @@ describe('Security User', () => {
       cy.get('#new_entity_button').click()
       cy.location('pathname').should('eq', conf.views.addUser.path)
       cy.get('#root_user_name').type('cypress')
+      cy.get('#root_auth_type').find('*').should('have.length', conf.auth_types.count+1)
       cy.get('#root_auth_type').select('agile-local')
       cy.get('#root_password').type('secret')
       cy.get('#root_role').select('admin')
@@ -322,37 +324,7 @@ describe('Security User', () => {
     })
   })
 
-  it('Add and update attribute to own user entity and delete it', () => {
-
-    cy.get('#navigation').find('button').should('have.length', conf.tabs.length)
-    cy.get('#navigation').get('button').then(tabs => {
-      let workingtab = conf.tabs.profile
-      tabs[workingtab.index].click()
-      let regex = new RegExp(workingtab.path.replace(/:[a-zA-Z]*/, '.*'))
-      cy.url().should('match', regex)
-      expand()
-      cy.get('#cypress').should('not.exist')
-      cy.get('span').contains('cypress').should('not.exist')
-      cy.get('span').contains('cypress.value').should('not.exist')
-      cy.wait(500)
-      cy.get('#new-attribute').invoke('height').should('be.greaterThan', 0)
-      cy.get('#new-attribute').type('cypress')
-      cy.wait(500)
-      cy.get('#new-attribute-value').invoke('height').should('be.greaterThan', 0)
-      cy.get('#new-attribute-value').type('cypress.value')
-      cy.get('#new-attribute-submit').click()
-      cy.get('#cypress').should('exist')
-      cy.get('#cypress_value').should('have.value', 'cypress.value')
-      cy.get('#cypress_value').clear()
-      cy.get('#cypress_value').type('updated.value')
-      cy.get('#navigation')
-      cy.get('#cypress_value').should('have.value', 'updated.value')
-      cy.get('#delete_cypress').click()
-      cy.get('#cypress').should('not.exist')
-    })
-  })
-
-
+  
     it('Switch to user overview tab and view first user attributes', () => {
 
       cy.get('#navigation').find('button').should('have.length', conf.tabs.length)
