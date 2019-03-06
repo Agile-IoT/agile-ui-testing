@@ -16,6 +16,9 @@
   "auth_types":{
     "count":1
   },
+  "roles":{
+    "count":1
+  },
   "tabs": {
     "length" : 7,
     "discover": {
